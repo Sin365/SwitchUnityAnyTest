@@ -8,18 +8,18 @@ using System.Text.RegularExpressions;
 
 public class AxiNSIO
 {
-    string save_name => AxiNS.instance.mount.SaveMountName;
-    public string save_path => $"{save_name}:/";
+	string save_name => AxiNS.instance.mount.SaveMountName;
+	public string save_path => $"{save_name}:/";
 #if UNITY_SWITCH
 	private FileHandle fileHandle = new nn.fs.FileHandle();
 #endif
-    /// <summary>
-    /// 检查Path是否存在
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <returns></returns>
-    public bool CheckPathExists(string filePath)
-    {
+	/// <summary>
+	/// 检查Path是否存在
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <returns></returns>
+	public bool CheckPathExists(string filePath)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -29,14 +29,14 @@ public class AxiNSIO
 		//这个异常捕获。真的别扭
 		return nn.fs.FileSystem.ResultPathAlreadyExists.Includes(result);
 #endif
-    }
-    /// <summary>
-    /// 检查Path是否不存在
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <returns></returns>
-    public bool CheckPathNotFound(string filePath)
-    {
+	}
+	/// <summary>
+	/// 检查Path是否不存在
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <returns></returns>
+	public bool CheckPathNotFound(string filePath)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -45,14 +45,14 @@ public class AxiNSIO
 		//这个异常捕获。真的别扭
 		return nn.fs.FileSystem.ResultPathNotFound.Includes(result);
 #endif
-    }
-    /// <summary>
-    /// 创建目录，目录存在也会返回true
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <returns></returns>
-    public bool CreateDir(string filePath)
-    {
+	}
+	/// <summary>
+	/// 创建目录，目录存在也会返回true
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <returns></returns>
+	public bool CreateDir(string filePath)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -64,38 +64,38 @@ public class AxiNSIO
 		}
 		return true;
 #endif
-    }
+	}
 
-    /// <summary>
-    /// 保存并创建文件（如果目录不存在回先自动创建目录）
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <param name="bw"></param>
-    /// <returns></returns>
-    public bool FileToSaveWithCreate(string filePath, System.IO.MemoryStream ms)
-    {
-        return FileToSaveWithCreate(filePath, ms.ToArray());
-    }
-    /// <summary>
-    /// 保存并创建文件（如果目录不存在回先自动创建目录）
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <param name="data"></param>
-    /// <returns></returns>
-    public AxiNSWait_FileToSaveByMSWithCreate FileToSaveWithCreateAsync(string filePath, System.IO.MemoryStream ms)
-    {
-        var wait = new AxiNSWait_FileToSaveByMSWithCreate(filePath, ms);
-        AxiNS.instance.wait.AddWait(wait);
-        return wait;
-    }
-    /// <summary>
-    /// 保存并创建文件（如果目录不存在回先自动创建目录）
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <param name="data"></param>
-    /// <returns></returns>
-    public bool FileToSaveWithCreate(string filePath, byte[] data)
-    {
+	/// <summary>
+	/// 保存并创建文件（如果目录不存在回先自动创建目录）
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <param name="bw"></param>
+	/// <returns></returns>
+	public bool FileToSaveWithCreate(string filePath, System.IO.MemoryStream ms)
+	{
+		return FileToSaveWithCreate(filePath, ms.ToArray());
+	}
+	/// <summary>
+	/// 保存并创建文件（如果目录不存在回先自动创建目录）
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <param name="data"></param>
+	/// <returns></returns>
+	public AxiNSWait_FileToSaveByMSWithCreate FileToSaveWithCreateAsync(string filePath, System.IO.MemoryStream ms)
+	{
+		var wait = new AxiNSWait_FileToSaveByMSWithCreate(filePath, ms);
+		AxiNS.instance.wait.AddWait(wait);
+		return wait;
+	}
+	/// <summary>
+	/// 保存并创建文件（如果目录不存在回先自动创建目录）
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <param name="data"></param>
+	/// <returns></returns>
+	public bool FileToSaveWithCreate(string filePath, byte[] data)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -199,42 +199,42 @@ public class AxiNSIO
 
 		return true;
 #endif
-    }
-    /// <summary>
-    /// 保存并创建文件（如果目录不存在回先自动创建目录）
-    /// </summary>
-    /// <param name="filePath"></param>
-    /// <param name="data"></param>
-    /// <returns></returns>
-    public AxiNSWait_FileToSaveWithCreate FileToSaveWithCreateAsync(string filePath, byte[] data)
-    {
-        var wait = new AxiNSWait_FileToSaveWithCreate(filePath, data);
-        AxiNS.instance.wait.AddWait(wait);
-        return wait;
-    }
-    public byte[] LoadSwitchDataFile(string filename)
-    {
-        LoadSwitchDataFile(filename, out byte[] outputData);
-        return outputData;
-    }
+	}
+	/// <summary>
+	/// 保存并创建文件（如果目录不存在回先自动创建目录）
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <param name="data"></param>
+	/// <returns></returns>
+	public AxiNSWait_FileToSaveWithCreate FileToSaveWithCreateAsync(string filePath, byte[] data)
+	{
+		var wait = new AxiNSWait_FileToSaveWithCreate(filePath, data);
+		AxiNS.instance.wait.AddWait(wait);
+		return wait;
+	}
+	public byte[] LoadSwitchDataFile(string filename)
+	{
+		LoadSwitchDataFile(filename, out byte[] outputData);
+		return outputData;
+	}
 
-    public bool LoadSwitchDataFile(string filename, ref System.IO.MemoryStream ms)
-    {
-        if (LoadSwitchDataFile(filename, out byte[] outputData))
-        {
-            using (System.IO.BinaryWriter writer = new System.IO.BinaryWriter(ms))
-            {
-                writer.Write(outputData);
-            }
-            return true;
-        }
-        return false;
-    }
-    public bool LoadSwitchDataFile(string filename, out byte[] outputData)
-    {
-#if !UNITY_SWITCH
-        outputData = null;
-        return false;
+	public bool LoadSwitchDataFile(string filename, ref System.IO.MemoryStream ms)
+	{
+		if (LoadSwitchDataFile(filename, out byte[] outputData))
+		{
+			using (System.IO.BinaryWriter writer = new System.IO.BinaryWriter(ms))
+			{
+				writer.Write(outputData);
+			}
+			return true;
+		}
+		return false;
+	}
+	public bool LoadSwitchDataFile(string filename, out byte[] outputData)
+	{
+#if !UNITY_SWITCH || UNITY_EDITOR
+		outputData = null;
+		return false;
 #else
 		outputData = null;
 		if (!AxiNS.instance.mount.SaveIsMount)
@@ -282,67 +282,100 @@ public class AxiNSIO
 		outputData = loadedData;
 		return true;
 #endif
-    }
-    public AxiNSWait_LoadSwitchDataFile LoadSwitchDataFileAsync(string filename)
-    {
-        var wait = new AxiNSWait_LoadSwitchDataFile(filename);
-        AxiNS.instance.wait.AddWait(wait);
-        return wait;
-    }
+	}
+	public AxiNSWait_LoadSwitchDataFile LoadSwitchDataFileAsync(string filename)
+	{
+		var wait = new AxiNSWait_LoadSwitchDataFile(filename);
+		AxiNS.instance.wait.AddWait(wait);
+		return wait;
+	}
 
-    public bool GetDirectoryFiles(string path, out string[] entrys)
-    {
-#if !UNITY_SWITCH
-        entrys = null;
-        return false;
+	public bool GetDirectoryFiles(string path, out string[] entrys)
+	{
+#if !UNITY_SWITCH || UNITY_EDITOR
+
+		entrys = null;
+		return false;
 #else
 		return GetDirectoryEntrys(path,nn.fs.OpenDirectoryMode.File,out entrys);
 #endif
-    }
+	}
 
-    public bool GetDirectoryDirs(string path, out string[] entrys)
-    {
-#if !UNITY_SWITCH
-        entrys = null;
-        return false;
+	public bool GetDirectoryDirs(string path, out string[] entrys)
+	{
+#if !UNITY_SWITCH || UNITY_EDITOR
+		entrys = null;
+		return false;
 #else
         return GetDirectoryEntrys(path, nn.fs.OpenDirectoryMode.Directory, out entrys);
 #endif
-    }
+	}
 
 #if UNITY_SWITCH
-    public bool GetDirectoryEntrys(string path, nn.fs.OpenDirectoryMode type, out string[] entrys)
+	public bool GetDirectoryEntrys(string path, nn.fs.OpenDirectoryMode type, out string[] entrys)
 	{
-        entrys = null;
-        return false;
-        nn.fs.DirectoryHandle dirHandle = new nn.fs.DirectoryHandle();
-        nn.Result result = nn.fs.Directory.Open(ref dirHandle, path, type);
-        if (nn.fs.FileSystem.ResultPathNotFound.Includes(result))
-        {
-            UnityEngine.Debug.Log($"目录 {path} 不存在");
-            entrys = null;
-            return false;
-        }
-        long entryCount = 0;
-        nn.fs.Directory.GetEntryCount(ref entryCount, dirHandle);
-        nn.fs.DirectoryEntry[] dirEntries = new nn.fs.DirectoryEntry[entryCount];
-        long actualEntries = 0;
-        nn.fs.Directory.Read(ref actualEntries, dirEntries, dirHandle, entryCount);
+		nn.fs.DirectoryHandle eHandle = new nn.fs.DirectoryHandle();
+		nn.Result result = nn.fs.Directory.Open(ref eHandle, path, type);
+		if (nn.fs.FileSystem.ResultPathNotFound.Includes(result))
+		{
+			UnityEngine.Debug.Log($"目录 {path} 不存在");
+			entrys = null;
+			return false;
+		}
+		long entryCount = 0;
+		nn.fs.Directory.GetEntryCount(ref entryCount, eHandle);
+		nn.fs.DirectoryEntry[] entries = new nn.fs.DirectoryEntry[entryCount];
+		long actualEntries = 0;
+		nn.fs.Directory.Read(ref actualEntries, entries, eHandle, entryCount);
 
 		entrys = new string[actualEntries];
-        for (int i = 0; i < actualEntries; i++)
-        {
-			entrys[i] = dirEntries[i].name;
-        }
-		nn.fs.Directory.Close(dirHandle);
+		for (int i = 0; i < actualEntries; i++)
+		{
+			entrys[i] = System.IO.Path.Combine(path, entries[i].name);
+		}
+		nn.fs.Directory.Close(eHandle);
 		return true;
-    }
+	}
 #endif
 
-    public IEnumerable<string> EnumerateFiles(string path, string searchPattern)
-    {
-#if !UNITY_SWITCH
-       yield break;
+
+#if UNITY_SWITCH
+	public bool GetDirectoryEntrysFullRecursion(string path, out string[] entrys)
+	{
+		nn.fs.DirectoryHandle eHandle = new nn.fs.DirectoryHandle();
+		nn.Result result = nn.fs.Directory.Open(ref eHandle, path, OpenDirectoryMode.All);
+		if (nn.fs.FileSystem.ResultPathNotFound.Includes(result))
+		{
+			UnityEngine.Debug.Log($"目录 {path} 不存在");
+			entrys = null;
+			return false;
+		}
+		long entryCount = 0;
+		nn.fs.Directory.GetEntryCount(ref entryCount, eHandle);
+		nn.fs.DirectoryEntry[] entries = new nn.fs.DirectoryEntry[entryCount];
+		long actualEntries = 0;
+		nn.fs.Directory.Read(ref actualEntries, entries, eHandle, entryCount);
+
+		List<string> temp = new List<string>();
+		for (int i = 0; i < actualEntries; i++)
+		{
+			string singlePath = System.IO.Path.Combine(path, entries[i].name);
+			temp.Add(singlePath);
+			if (entries[i].entryType == EntryType.Directory && GetDirectoryEntrysFullRecursion(singlePath, out string[] singleEntryList))
+			{
+				temp.AddRange(singleEntryList);
+			}
+		}
+		nn.fs.Directory.Close(eHandle);
+		entrys = temp.ToArray();
+		return true;
+	}
+#endif
+
+	public IEnumerable<string> EnumerateFiles(string path, string searchPattern)
+	{
+#if !UNITY_SWITCH || UNITY_EDITOR
+		yield break;
 #else
     // 将通配符转换为正则表达式（支持*和?）
     var regexPattern = "^" + 
@@ -366,10 +399,10 @@ public class AxiNSIO
 			}
         }
 #endif
-    }
+	}
 
-    public bool DeletePathFile(string filename)
-    {
+	public bool DeletePathFile(string filename)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -404,15 +437,15 @@ public class AxiNSIO
 #endif
 
 #endif
-    }
-    public AxiNSWait_DeletePathFile DeletePathFileAsync(string filename)
-    {
-        var wait = new AxiNSWait_DeletePathFile(filename);
-        AxiNS.instance.wait.AddWait(wait);
-        return wait;
-    }
-    public bool DeletePathDir(string filename)
-    {
+	}
+	public AxiNSWait_DeletePathFile DeletePathFileAsync(string filename)
+	{
+		var wait = new AxiNSWait_DeletePathFile(filename);
+		AxiNS.instance.wait.AddWait(wait);
+		return wait;
+	}
+	public bool DeletePathDir(string filename)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -445,21 +478,21 @@ public class AxiNSIO
         UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
 #endif
 #endif
-    }
-    public AxiNSWait_DeletePathDir DeletePathDirAsync(string filename)
-    {
-        var wait = new AxiNSWait_DeletePathDir(filename);
-        AxiNS.instance.wait.AddWait(wait);
-        return wait;
-    }
+	}
+	public AxiNSWait_DeletePathDir DeletePathDirAsync(string filename)
+	{
+		var wait = new AxiNSWait_DeletePathDir(filename);
+		AxiNS.instance.wait.AddWait(wait);
+		return wait;
+	}
 
-    /// <summary>
-    /// 递归删除目录
-    /// </summary>
-    /// <param name="filename"></param>
-    /// <returns></returns>
-    public bool DeleteRecursivelyPathDir(string filename)
-    {
+	/// <summary>
+	/// 递归删除目录
+	/// </summary>
+	/// <param name="filename"></param>
+	/// <returns></returns>
+	public bool DeleteRecursivelyPathDir(string filename)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -492,15 +525,15 @@ public class AxiNSIO
         UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
 #endif
 #endif
-    }
+	}
 
-    /// <summary>
-    /// 递归删除情况
-    /// </summary>
-    /// <param name="filename"></param>
-    /// <returns></returns>
-    public bool CleanRecursivelyPathDir(string filename)
-    {
+	/// <summary>
+	/// 递归删除情况
+	/// </summary>
+	/// <param name="filename"></param>
+	/// <returns></returns>
+	public bool CleanRecursivelyPathDir(string filename)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -533,10 +566,10 @@ public class AxiNSIO
         UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
 #endif
 #endif
-    }
+	}
 
-    public bool RenameDir(string oldpath, string newpath)
-    {
+	public bool RenameDir(string oldpath, string newpath)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -570,9 +603,9 @@ public class AxiNSIO
         UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
 #endif
 #endif
-    }
-    bool EnsureParentDirectory(string filePath, bool bAutoCreateDir = true)
-    {
+	}
+	bool EnsureParentDirectory(string filePath, bool bAutoCreateDir = true)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -648,14 +681,14 @@ public class AxiNSIO
 		return true;
 
 #endif
-    }
-    /// <summary>
-    /// 检查指定挂载点是否可访问
-    /// </summary>
-    /// <param name="pathPrefix">路径前缀，例如 "save:/" 或 "sd:/"</param>
-    /// <returns>挂载点是否可访问</returns>
-    bool IsMountPointAccessible(string pathPrefix)
-    {
+	}
+	/// <summary>
+	/// 检查指定挂载点是否可访问
+	/// </summary>
+	/// <param name="pathPrefix">路径前缀，例如 "save:/" 或 "sd:/"</param>
+	/// <returns>挂载点是否可访问</returns>
+	bool IsMountPointAccessible(string pathPrefix)
+	{
 #if !UNITY_SWITCH
         return false;
 #else
@@ -693,5 +726,5 @@ public class AxiNSIO
 			return true; // 其他挂载点需根据实际需求实现
 		}
 #endif
-    }
+	}
 }

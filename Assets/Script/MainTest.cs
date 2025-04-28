@@ -129,28 +129,26 @@ public class MainTest : MonoBehaviour
 				UnityEngine.Debug.Log($"result =>{result}");
 			else
 			{
+				UnityEngine.Debug.Log($"====EntrysList====");
 				foreach (var e in elist)
-				{
-					UnityEngine.Debug.Log($"result =>{result}");
-				}
+					UnityEngine.Debug.Log(e);
 			}
 		}
 		); text17.text = $"AxiNS.instance.io.GetDirectoryEntrys({"save:/"},nn.fs.OpenDirectoryMode.All,out var elist)";
 
 		btn18.onClick.AddListener(() =>
 		{
-			bool result = AxiNS.instance.io.GetDirectoryEntrys("save:/axibug", nn.fs.OpenDirectoryMode.All, out var elist);
+			bool result = AxiNS.instance.io.GetDirectoryEntrysFullRecursion("save:/",out var elist);
 			if (!result)
 				UnityEngine.Debug.Log($"result =>{result}");
 			else
 			{
+				UnityEngine.Debug.Log($"==== FullRecursion Entrys List====");
 				foreach (var e in elist)
-				{
-					UnityEngine.Debug.Log($"result =>{result}");
-				}
+					UnityEngine.Debug.Log(e);
 			}
 		}
-		); text18.text = $"AxiNS.instance.io.GetDirectoryEntrys({"save:/axibug"},nn.fs.OpenDirectoryMode.All,out var elist)";
+		); text18.text = $"AxiNS.instance.io.GetDirectoryEntrysFullRecursion({"save:/"},out var elist)";
 
 		btn19.onClick.AddListener(() =>
 		{
@@ -159,10 +157,9 @@ public class MainTest : MonoBehaviour
 				UnityEngine.Debug.Log($"result =>{result}");
 			else
 			{
+				UnityEngine.Debug.Log($"====EntrysList====");
 				foreach (var e in elist)
-				{
-					UnityEngine.Debug.Log($"result =>{result}");
-				}
+					UnityEngine.Debug.Log(e);
 			}
 		}
 		); text19.text = $"AxiNS.instance.io.GetDirectoryEntrys({"save:/axibug/"},nn.fs.OpenDirectoryMode.All,out var elist)";
@@ -174,10 +171,9 @@ public class MainTest : MonoBehaviour
 				UnityEngine.Debug.Log($"result =>{result}");
 			else
 			{
+				UnityEngine.Debug.Log($"====EntrysList====");
 				foreach (var e in elist)
-				{
-					UnityEngine.Debug.Log($"result =>{result}");
-				}
+					UnityEngine.Debug.Log(e);
 			}
 		}
 		); text20.text = $"AxiNS.instance.io.GetDirectoryDirs({"save:/"},out var elist)";
@@ -189,10 +185,9 @@ public class MainTest : MonoBehaviour
 				UnityEngine.Debug.Log($"result =>{result}");
 			else
 			{
+				UnityEngine.Debug.Log($"====EntrysList====");
 				foreach (var e in elist)
-				{
-					UnityEngine.Debug.Log($"result =>{result}");
-				}
+					UnityEngine.Debug.Log(e);
 			}
 		}
 		); text21.text = $"AxiNS.instance.io.GetDirectoryFiles({"save:/"},out var elist)";
