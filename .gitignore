@@ -1,0 +1,17 @@
+/*.vsconfig
+/Library/
+/Temp/
+/UserSettings/
+/.vs/
+/*.csproj
+/*.sln
+/*.sln
+/obj/
+/logs/
+/Output/
+
+**/switch_keys/*.keys
+**/switch_keys/*.keys.meta
+**/NintendoSDKPlugin/
+**/NintendoSDKPlugin.meta
+**/Application.aarch64.lp64.nmeta
